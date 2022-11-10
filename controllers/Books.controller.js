@@ -25,17 +25,26 @@ module.exports.booksController = {
         })
     },
     getBookbyId: (req, res) => {
-        Books.findById(req.params.bookId).then(books => {
+        Books.findById(req.params.bookId)
+        .populate('author')
+        .populate('genre')
+        .then(books => {
             res.json(books)
         })
     },
     getBooks: (req, res) => {
-        Books.find().then(books => {
+        Books.find()
+        .populate('author')
+        .populate('genre')
+        .then(books => {
             res.json(books)
         })
     },
     getBookbyGenre: (req, res) => {
-        Books.find({genre: req.params.genreId}).then(books => {
+        Books.find({genre: req.params.genreId})
+        .populate('author')
+        .populate('genre')
+        .then(books => {
             res.json(books)
         })
     },
